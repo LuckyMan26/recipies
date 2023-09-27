@@ -13,6 +13,6 @@ int main(int argc, char *argv[])
         &app, []() { QCoreApplication::exit(-1); },
         Qt::QueuedConnection);
     engine.load(url);
-
+    std::cout<<"Hello\n";
     return app.exec();
 }
