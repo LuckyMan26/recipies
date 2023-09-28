@@ -11,4 +11,11 @@ Window {
         id: myButton
         text: "Click Me"
     }
+    client {
+            id: client
+        }
+    server {
+        id: server
+    }
+
 }

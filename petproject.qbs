@@ -6,6 +6,8 @@ CppApplication {
     property pathList qmlImportPaths: []
 
     files: [
+        "client.cpp",
+        "client.h",
         "main.cpp",
         "server.cpp",
         "server.h",

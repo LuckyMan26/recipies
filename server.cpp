@@ -42,5 +42,6 @@ void server::sendToClient(QString str){
     Data.clear();
     QDataStream out(&Data,QIODevice::WriteOnly);
     out << str;
-    socket->write(Data);
+    for(int i=0;i<sockets.size();i++)
+        sockets[i]->write(Data);
 }
