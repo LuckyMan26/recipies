@@ -7,6 +7,8 @@ CppApplication {
 
     files: [
         "main.cpp",
+        "server.cpp",
+        "server.h",
     ]
 
     Group {
