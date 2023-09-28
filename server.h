@@ -12,12 +12,14 @@ class server : public QTcpServer
     QByteArray Data;
 public:
 
-    void connectToServer(qintptr socketDescriptor);
-    void sendData(QByteArray Data);
+
+
     server();
-    void sendToClient(QString Data);
+    Q_INVOKABLE void sendToClient(QString Data);
 public slots:
     void readyRead();
+    void incommingConnection(qintptr socketDescriptor);
+
 };
 
 #endif // SERVER_H

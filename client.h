@@ -6,7 +6,7 @@
 #include <QObject>
 #include <QTcpSocket>
 
-class client
+class client : public QObject
 {
     Q_OBJECT
     QTcpSocket* socket;
@@ -15,9 +15,12 @@ class client
     QByteArray Data;
 public:
     client();
-    void sendToServer(QString str);
+    Q_INVOKABLE void sendToServer(QString str);
 public slots:
     void readyRead();
+
+signals:
+    void g();
 
 };
 

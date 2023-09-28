@@ -5,26 +5,30 @@
 server::server()
 {
 
-    if(this->listen(QHostAddress::Any,2023)){
+    if(this->listen(QHostAddress::Any,2323)){
         qDebug() << "fine\n";
     }
     else{
          qDebug() << "error\n";
     }
+
 }
 
 
-void server::connectToServer(qintptr socketDescriptor)
+void server::incommingConnection(qintptr socketDescriptor)
 {
-    QTcpSocket* socket_ = new QTcpSocket;
-    socket_->setSocketDescriptor(socketDescriptor);
-    connect(socket_,&QTcpSocket::readyRead,this,&server::readyRead);
-    connect(socket_,&QTcpSocket::disconnected,socket_,&QTcpSocket::deleteLater);
+    socket= new QTcpSocket;
+    socket->setSocketDescriptor(socketDescriptor);
 
-    sockets.push_back(socket_);
+    connect(socket,&QTcpSocket::readyRead,this,&server::readyRead);
+    connect(socket,&QTcpSocket::disconnected,socket,&QTcpSocket::deleteLater);
+
+    sockets.push_back(socket);
 }
 
 void server::readyRead(){
+
+
     socket = (QTcpSocket*)sender();
     QDataStream in(socket);
     if(in.status() == QDataStream::Ok){
@@ -39,6 +43,9 @@ void server::readyRead(){
 }
 
 void server::sendToClient(QString str){
+
+    qDebug()<<"1";
+
     Data.clear();
     QDataStream out(&Data,QIODevice::WriteOnly);
     out << str;

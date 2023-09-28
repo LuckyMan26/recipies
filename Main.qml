@@ -9,13 +9,36 @@ Window {
     title: qsTr("Hello World")
     Button{
         id: myButton
-        text: "Click Me"
-    }
-    client {
-            id: client
-        }
-    server {
-        id: server
+        text: "Send"
+        onClicked: {
+
+                client.sendToServer("Example message");
+           }
     }
 
+    TextArea {
+           id: textArea
+           anchors.centerIn: parent
+           wrapMode: TextArea.Wrap
+
+           placeholderText: "Enter your text here..."
+
+           function appendMessage(){
+                console.log('Here');
+                append("Client: ");
+           }
+       }
+    TextField {
+                id: inputLine
+                width: parent.width - 40
+                y: 100
+            }
+    Connections{
+        target: client
+        onG: {
+            console.log("Received signal from C++:", client);
+            textArea.appendMessage();
+        }
+
+    }
 }
